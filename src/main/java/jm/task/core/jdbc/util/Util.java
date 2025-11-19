@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Util {
 
@@ -16,6 +18,7 @@ public class Util {
     private static final String PASSWORD = "0n1oh";
     private static final String URL = "jdbc:mysql://localhost:3306/training";
     private static SessionFactory sessionFactory;
+    private static final Logger logger = Logger.getLogger(Util.class.getName());
 
     public static Connection getConnection() {
 
@@ -52,8 +55,9 @@ public class Util {
                 configuration.addAnnotatedClass(User.class);
 
                 sessionFactory = configuration.buildSessionFactory();
-                System.out.println("Сессия создана успешно");
+                logger.info("Сессия создана успешно");
             } catch (Exception e) {
+                logger.log(Level.SEVERE, "Ошибка при создании сессии", e);
             }
         }
         return sessionFactory;
@@ -62,7 +66,7 @@ public class Util {
     public static void closing() {
         if (sessionFactory != null) {
             sessionFactory.close();
-            System.out.println("Сессия закрыта");
+            logger.info("Сессия закрыта");
         }
     }
 }
