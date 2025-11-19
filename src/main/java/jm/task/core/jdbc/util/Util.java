@@ -25,13 +25,13 @@ public class Util {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
-            System.out.println("Подключение к базе успешно");
+            logger.info("Подключение к базе успешно");
             return con;
         } catch (ClassNotFoundException e) {
-            System.out.println("Драйвер не найден");
+            logger.severe("Драйвер не найден");
             throw new RuntimeException(e);
         } catch (SQLException e) {
-            System.out.println("Ошибка подключения к базе данных");
+            logger.severe("Ошибка подключения к базе данных");
             throw new RuntimeException(e);
         }
     }

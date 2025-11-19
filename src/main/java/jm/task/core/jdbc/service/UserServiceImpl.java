@@ -4,9 +4,11 @@ import jm.task.core.jdbc.dao.UserDao;
 import jm.task.core.jdbc.model.User;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class UserServiceImpl implements UserService {
 
+    private static final Logger logger = Logger.getLogger(UserServiceImpl.class.getName());
     private final UserDao userDao;
 
     public UserServiceImpl(UserDao userDao) {
@@ -26,7 +28,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(String name, String lastName, byte age) {
         userDao.saveUser(name, lastName, age);
-        System.out.println("User с именем — " + name + " добавлен в базу данных");
+        logger.info("User с именем — " + name + " добавлен в базу данных");
     }
 
     @Override

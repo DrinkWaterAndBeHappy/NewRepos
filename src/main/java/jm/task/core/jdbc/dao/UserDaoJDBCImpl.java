@@ -1,13 +1,17 @@
 package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.service.UserServiceImpl;
 import jm.task.core.jdbc.util.Util;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class UserDaoJDBCImpl implements UserDao {
+
+    private static final Logger logger = Logger.getLogger(UserServiceImpl.class.getName());
     private final Connection connection;
 
     public UserDaoJDBCImpl() {
@@ -25,7 +29,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
-            System.out.println("Таблица создана");
+            logger.info("Таблица создана");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -37,7 +41,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sqlDrop);
-            System.out.println("Таблица была успешно удалена");
+            logger.info("Таблица была успешно удалена");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -52,7 +56,7 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedStatement.setString(2, lastName);
             preparedStatement.setByte(3, age);
             preparedStatement.executeUpdate();
-            System.out.println("User с именем — " + name + " добавлен в базу данных");
+            logger.info("User с именем — " + name + " добавлен в базу данных");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
