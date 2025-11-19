@@ -17,6 +17,7 @@ public class UserDaoHibernateImpl implements UserDao {
         String sql = "CREATE TABLE IF NOT EXISTS users (" +
                 "id BIGINT NOT NULL AUTO_INCREMENT, " +
                 "name VARCHAR(40), " +
+                "lastname VARCHAR(40), " +
                 "age TINYINT, " +
                 "PRIMARY KEY(id))";
 
