@@ -3,7 +3,13 @@ import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
 
+import java.util.logging.Logger;
+
+
 public class Main {
+
+    private static final Logger logger = Logger.getLogger(Main.class.getName());
+
     public static void main(String[] args) {
 
 //        UserService userService = new UserServiceImpl(new UserDaoJDBCImpl());
@@ -24,7 +30,7 @@ public class Main {
 
         userService1.createUsersTable();
         userService1.saveUser("Name5", "Lastname5", (byte)55);
-        userService1.getAllUsers().forEach(System.out::println);
+        userService1.getAllUsers().forEach(user -> logger.info(user.toString()));
         userService1.createUsersTable();
         userService1.dropUsersTable();
     }
